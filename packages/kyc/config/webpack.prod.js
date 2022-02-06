@@ -9,15 +9,14 @@ const prodConfig = {
   mode: 'production',
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: '/container/latest/',
+    publicPath: '/kyc/latest/',
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'container',
-      remotes: {
-        helloReact: `helloReact@${domain}/helloReact/latest/remoteEntry.js`,
-        helloVue: `helloVue@${domain}/helloVue/latest/remoteEntry.js`,
-        kyc: `kyc@${domain}/kyc/latest/remoteEntry.js`,
+      name: 'kyc',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './KycApp': './src/bootstrap',
       },
       shared: packageJson.dependencies,
     }),
